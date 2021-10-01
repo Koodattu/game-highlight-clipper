@@ -45,21 +45,25 @@ namespace GameHighlightClipper.Helpers
                 Directory.CreateDirectory(folder);
             }
 
+            if (File.Exists(path))
+            {
+                return (Bitmap)Image.FromFile(path);
+            }
+
             Process process = new Process();
             process.StartInfo.FileName = "./video/ffmpeg/ffmpeg.exe";
-            process.StartInfo.Arguments = "-ss " + time.ToString() + " -i \"" + video + "\" -vframes 1 -vcodec png .\\" + path;
+            process.StartInfo.Arguments = "-ss " + time.ToString() + " -i \"" + video + "\" -vframes 1 -vcodec png \".\\" + path + "\"";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardError = false;
-            process.StartInfo.RedirectStandardOutput = false;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.RedirectStandardOutput = true;
             process.Start();
+            string results = process.StandardOutput.ReadToEnd();
+            string errors = process.StandardError.ReadToEnd();
             process.WaitForExit();
 
             Bitmap bitmap = (Bitmap)Image.FromFile(path);
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
+
             return bitmap;
         }
 

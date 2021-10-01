@@ -28,7 +28,7 @@
             </Grid>
 
             <Grid Margin="0 8 0 4">
-                <TextBlock Text="{Binding VideoFile.FileName}" FontSize="14" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding VideoFile.FileName}" FontSize="14" Width="350" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Right" >
                     <Button Content="▶" Width="35" Height="25" Margin="0 0 4 0" Command="{Binding StartProcessingCommand}" />
                     <Button Content="📂" Width="35" Height="25" Margin="4 0" Command="{Binding OpenFileLocationCommand}" />
